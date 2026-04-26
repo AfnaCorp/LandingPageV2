@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
 type MarkdownRendererProps = {
@@ -20,8 +20,7 @@ const escapeHtml = (value: string): string =>
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
+    .replaceAll('"', '&quot;');
 
 const sanitizeHref = (href: string): string => {
   const trimmed = href.trim();
@@ -37,28 +36,19 @@ const sanitizeHref = (href: string): string => {
   return '#';
 };
 
-const getMailtoEmail = (href: string): string | null => {
-  if (!href.trim().toLowerCase().startsWith('mailto:')) {
-    return null;
-  }
-
-  return href.trim().slice('mailto:'.length).split('?')[0] || null;
-};
-
 const renderInline = (text: string): string => {
   let content = escapeHtml(text);
+  const links: string[] = [];
 
   content = content.replace(
     /\[([^\]]+)\]\(([^)\s]+)\)/g,
     (_, label: string, href: string) => {
       const sanitizedHref = sanitizeHref(href);
-      const mailtoEmail = getMailtoEmail(sanitizedHref);
+      const linkHtml = `<a href="${escapeHtml(sanitizedHref)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+      const token = `\u0000LINK${links.length}\u0000`;
 
-      if (mailtoEmail) {
-        return `<a href="#" data-copy-email="${escapeHtml(mailtoEmail)}">${escapeHtml(label)}</a>`;
-      }
-
-      return `<a href="${escapeHtml(sanitizedHref)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+      links.push(linkHtml);
+      return token;
     }
   );
 
@@ -67,6 +57,10 @@ const renderInline = (text: string): string => {
   content = content.replace(/__([^_]+)__/g, '<strong>$1</strong>');
   content = content.replace(/\*([^*]+)\*/g, '<em>$1</em>');
   content = content.replace(/_([^_]+)_/g, '<em>$1</em>');
+
+  links.forEach((link, index) => {
+    content = content.replaceAll(`\u0000LINK${index}\u0000`, link);
+  });
 
   return content;
 };
@@ -276,7 +270,6 @@ const markdownToHtml = (markdown: string): string => {
 };
 
 export function MarkdownRenderer({ markdown, className }: MarkdownRendererProps) {
-  const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
   const html = useMemo(() => markdownToHtml(markdown), [markdown]);
 
   return (
@@ -303,28 +296,8 @@ export function MarkdownRenderer({ markdown, className }: MarkdownRendererProps)
           '[&_hr]:my-4 [&_hr]:border-border/60',
           className
         )}
-        onClick={(event) => {
-          const target = event.target instanceof HTMLElement ? event.target.closest('a[data-copy-email]') : null;
-          if (!(target instanceof HTMLAnchorElement)) {
-            return;
-          }
-
-          event.preventDefault();
-          const email = target.dataset.copyEmail;
-          if (!email) {
-            return;
-          }
-
-          void navigator.clipboard.writeText(email).then(() => {
-            setCopiedEmail(email);
-            window.setTimeout(() => setCopiedEmail(null), 1800);
-          });
-        }}
         dangerouslySetInnerHTML={{ __html: html }}
       />
-      {copiedEmail ? (
-        <p className="mt-2 text-xs font-medium text-primary">Adresse copiée : {copiedEmail}</p>
-      ) : null}
     </div>
   );
 }

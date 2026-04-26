@@ -1,6 +1,6 @@
 # Conditions Générales d'Utilisation
 
-**Version en vigueur au 15 avril 2026**
+**Version en vigueur au 27 avril 2026**
 
 **Éditeur :** Bloowing SAS, 28 place de la Bourse, 75002 Paris
 
@@ -9,6 +9,8 @@
 Les présentes Conditions Générales d'Utilisation, ci-après les **CGU**, régissent l'accès et l'utilisation de la plateforme Jloow, éditée par la société Bloowing SAS, ci-après la **Société**, dont le siège social est situé 28 place de la Bourse, 75002 Paris.
 
 Toute personne souhaitant accéder à la plateforme Jloow doit lire attentivement les présentes CGU et les accepter sans réserve préalablement à toute utilisation du service. L'acceptation des CGU vaut engagement contractuel de l'Utilisateur à l'égard de la Société.
+
+Les présentes CGU sont à lire conjointement avec les [Conditions Générales de Vente](/cgv) et la [Politique de Confidentialité](/politique-de-confidentialite), disponibles sur la plateforme.
 
 La Société se réserve le droit de modifier les présentes CGU à tout moment. Les modifications entrent en vigueur dès leur publication sur la plateforme. L'utilisation continue de la plateforme après notification des modifications vaut acceptation des nouvelles CGU.
 
@@ -66,6 +68,18 @@ La pertinence des suggestions, la qualité des profils mis en relation, la concl
 
 Les informations figurant sur les profils sont déclarées sous la responsabilité exclusive de chaque Utilisateur. La Société ne procède pas à la vérification systématique de l'exactitude des informations publiées.
 
+### 3.5 Les Drops - mises en relation qualifiées
+
+Un **Drop** désigne une mise en relation qualifiée générée par l'algorithme de smart matching de Jloow. Il s'agit d'un profil utilisateur compatible sélectionné et proposé activement à l'Utilisateur dans le cadre d'un programme ou en dehors.
+
+Un Drop est considéré comme consommé dès lors qu'il est envoyé à l'Utilisateur par la plateforme, indépendamment du fait que l'Utilisateur l'accepte, le consulte ou initie un contact.
+
+Le nombre de Drops mensuels est défini par le Pass souscrit par l'Utilisateur, indépendamment du nombre de challenges auxquels il est inscrit. Le quota de Drops s'applique à l'ensemble des mises en relation reçues par l'Utilisateur, tous programmes confondus.
+
+Les Drops non consommés à la fin de la période mensuelle sont perdus et ne sont pas reportés sur le mois suivant.
+
+Le quota mensuel de Drops peut être révisé à la hausse par la Société, selon des critères internes propres à la qualité et à l'activité de l'Utilisateur sur la plateforme. Toute augmentation du quota sera notifiée à l'Utilisateur. Le quota ne peut être révisé à la baisse en cours de période d'abonnement.
+
 ## Article 4 - Modèle économique et conditions financières
 
 ### 4.1 Modèle mixte : accès gratuit et offres premium
@@ -78,6 +92,9 @@ Fonctionnalités incluses dans l'accès gratuit :
 
 - Création et consultation du profil.
 - Accès aux descriptions des programmes et événements.
+- Participation possible aux événements ouverts au Tarif Public, conformément à l'article 4.5.
+
+L'accès gratuit ne permet pas l'inscription à un Challenge ni l'accès au Tarif Abonné.
 
 Les offres payantes, dites **Premium**, donnent accès à des fonctionnalités avancées, notamment :
 
@@ -89,14 +106,13 @@ Les offres payantes, dites **Premium**, donnent accès à des fonctionnalités a
 
 ### 4.2 Abonnements
 
-Pour participer à un programme thématique ou un événement, l'Utilisateur doit souscrire à l'un des abonnements proposés sur la plateforme.
+Pour participer à un programme thématique ou un événement, l'Utilisateur doit souscrire à l'abonnement proposé sur la plateforme.
 
-#### Types d'abonnement
+#### Type d'abonnement
 
 | Abonnement | Accès inclus | Durée | Renouvellement |
 | --- | --- | --- | --- |
-| Pass Universel | Accès jusqu'à 3 programmes Grand Challenge et tous événements associés. Accès jusqu'à 5 programmes Smart Challenge et tous événements associés. | Mensuel / Annuel | Automatique |
-| Pass Smart+ | Accès jusqu'à 5 programmes Smart Challenge et tous événements associés. | Mensuel / Annuel | Automatique |
+| Pass Universel | Sélection illimitée de Challenges, Grand Challenge et Smart Challenge disponibles. Accès aux événements au Tarif Abonné. 6 Drops minimum par mois, quota révisable à la hausse par Jloow. | Mensuel / Annuel | Automatique |
 
 #### Modalités d'abonnement
 
@@ -123,13 +139,21 @@ L'Utilisateur peut désactiver le renouvellement automatique depuis :
 
 Tout changement prend effet à la fin de la période d'abonnement en cours.
 
+#### Fonctionnement des Drops
+
+Le quota mensuel de Drops inclus dans le Pass Universel est fixé à un minimum de 6 Drops pour le premier mois d'abonnement. Ce quota est indépendant du nombre de programmes, Grand Challenge ou Smart Challenge, auxquels l'Utilisateur est inscrit.
+
+La Société se réserve le droit d'augmenter ce quota à compter du deuxième mois, selon des critères qualitatifs et d'activité internes. Toute augmentation du quota est notifiée à l'Utilisateur dans son espace personnel. Le quota ne peut pas être réduit en cours de période d'abonnement.
+
+Les Drops non consommés à la fin de la période mensuelle sont perdus et ne sont pas reportés au mois suivant. La période mensuelle est calculée à compter de la date d'anniversaire de la souscription ou de renouvellement.
+
 ### 4.3 Frais supplémentaires et partenariats
 
 Certains programmes ou événements peuvent nécessiter le paiement de frais supplémentaires aux partenaires de Jloow. Ces frais sont :
 
 - Clairement indiqués sur la page de description du programme ou de l'événement.
 - Facturés soit par le partenaire concerné, selon ses propres conditions tarifaires, soit via Jloow.
-- Non inclus dans les Pass Universel ou Smart+.
+- Non inclus dans le Pass Universel.
 
 ### 4.4 Accès ponctuel sans abonnement
 
@@ -140,29 +164,49 @@ L'Utilisateur peut accéder à un événement spécifique sans souscrire à un P
 - Modalités : paiement unique et non remboursable.
 - L'accès est limité à l'événement concerné et ne donne pas accès aux programmes ou autres événements.
 
-### 4.5 Politique de remboursement
+### 4.5 Grille tarifaire des événements
 
-Conformément à l'article L.221-28 du Code de la consommation, le droit de rétractation de 14 jours ne s'applique pas aux contrats de fourniture de contenu numérique, notamment l'accès aux programmes et événements, dont l'exécution a commencé avec l'accord exprès de l'Utilisateur et sa renonciation à son droit de rétractation.
+L'accès aux événements, Grand Match, Smart Match et Private Match, est soumis à une tarification différenciée selon le statut de l'Utilisateur :
 
-Le droit de rétractation ne s'applique pas non plus aux primes d'accès ponctuelles, considérées comme des prestations exécutées immédiatement.
+- **Tarif Abonné :** tarif privilégié, réservé exclusivement aux Utilisateurs titulaires d'un Pass Universel actif. Ce tarif est inférieur au Tarif Public et est affiché après connexion dans l'espace abonné.
+- **Tarif Public :** tarif standard accessible à tout Utilisateur, qu'il soit Abonné ou non. L'Utilisateur non Abonné peut accéder aux événements à ce tarif via une prime d'accès ponctuelle, sans possibilité de s'inscrire à un Challenge.
+
+### 4.6 Politique de remboursement
+
+Conformément à l'article L.221-28 du Code de la consommation, le droit de rétractation de 14 jours ne s'applique pas :
+
+- Aux contrats de fourniture de contenu numérique, notamment l'accès aux programmes et événements, dont l'exécution a commencé avec l'accord exprès de l'Utilisateur et sa renonciation à son droit de rétractation.
+- Aux primes d'accès ponctuelles, considérées comme des prestations exécutées immédiatement.
 
 Exceptions :
 
 - En cas de défaut de conformité, notamment lorsqu'un événement est annulé sans proposition de report, un remboursement intégral sera effectué sous 14 jours.
 - Pour les abonnements, aucun remboursement n'est dû en cas de résiliation après le début de la période d'abonnement.
 
-### 4.6 Modifications tarifaires
+### 4.7 Modifications tarifaires
 
 Jloow se réserve le droit de modifier ses tarifs à tout moment.
 
 - Les Utilisateurs existants seront informés par email au moins 30 jours avant l'application des nouveaux tarifs.
 - Les modifications s'appliquent uniquement aux renouvellements postérieurs à la date d'effet.
 
-## Article 5 - Données personnelles et RGPD
+### 4.8 Offres à durée limitée et codes promotionnels
 
-### 5.1 Responsable du traitement
+Jloow peut proposer ponctuellement des tarifs réduits accessibles via un code promotionnel. Ces offres obéissent aux règles suivantes :
 
-Le responsable du traitement des données personnelles est la société Bloowing, dont le délégué à la protection des données, ci-après **DPO**, est joignable à l'adresse suivante : [dpo@jloow.com](mailto:dpo@jloow.com).
+- **Nature :** le code promotionnel est une réduction commerciale temporaire, sans valeur contractuelle pérenne. Il ne constitue pas un droit acquis pour les périodes suivantes.
+- **Utilisation :** le code doit être saisi avant la validation de la commande. Il est à usage unique par compte Utilisateur, non cumulable avec d'autres offres ou réductions, et non remboursé en cas de non-utilisation.
+- **Période de validité :** chaque code est assorti d'une date d'expiration affichée lors de son utilisation. Passé ce délai, le code est automatiquement inactivé.
+- **Renouvellement :** sauf mention contraire explicite au moment de la souscription, le renouvellement automatique s'effectue au tarif plein en vigueur. La non-reconduction d'un code promotionnel ne constitue pas une modification tarifaire au sens de l'article 4.7.
+- **Suspension temporaire d'une offre :** Jloow se réserve le droit de suspendre temporairement une offre d'abonnement sans que cela ne constitue une modification des présentes CGU. Les Utilisateurs concernés en seront informés au moins 30 jours à l'avance et leurs abonnements en cours seront maintenus jusqu'à leur terme.
+
+## Article 5 - Protection des données personnelles
+
+Le traitement de vos données personnelles est régi par notre [Politique de Confidentialité](/politique-de-confidentialite), disponible sur la plateforme, conforme au Règlement Général sur la Protection des Données et à la loi Informatique et Libertés.
+
+Pour exercer vos droits, notamment accès, rectification, effacement, opposition, portabilité et limitation, veuillez consulter la section 7 de la Politique de Confidentialité ou contacter notre DPO à [dpo@jloow.com](mailto:dpo@jloow.com).
+
+En cas de réclamation non résolue, l'Utilisateur peut saisir la Commission Nationale de l'Informatique et des Libertés, CNIL, à l'adresse [www.cnil.fr](https://www.cnil.fr).
 
 ## Article 6 - Obligations et responsabilités des Utilisateurs
 
@@ -192,7 +236,7 @@ La Société se réserve le droit de supprimer tout contenu enfreignant les pré
 
 ### 7.1 Exclusion de garantie de résultat du matching
 
-La Société met en oeuvre tous les moyens techniques et algorithmiques dont elle dispose pour proposer des suggestions de matching pertinentes. Toutefois, la Société n'est tenue qu'à une obligation de moyens et exclut expressément toute garantie de résultat concernant la pertinence des mises en relation, la qualité des profils présentés, ou l'aboutissement de toute collaboration ou transaction entre Utilisateurs.
+La Société met en oeuvre tous les moyens techniques et algorithmiques dont elle dispose pour proposer des suggestions de matching pertinentes. Toutefois, la Société n'est tenue qu'à une obligation de moyens et exclut expressément toute garantie de résultat concernant la pertinence des mises en relation, la qualité des profils présentés ou l'aboutissement de toute collaboration ou transaction entre Utilisateurs.
 
 ### 7.2 Absence d'implication dans les litiges entre Utilisateurs
 
@@ -200,19 +244,17 @@ La Société n'intervient pas dans les relations nouées entre les Utilisateurs 
 
 ### 7.3 Disponibilité du service
 
-La Société s'efforce d'assurer la continuité du service mais ne peut garantir une disponibilité ininterrompue de la plateforme. Des interruptions de service peuvent survenir pour des raisons de maintenance, de mise à jour, ou en cas d'incidents techniques indépendants de la volonté de la Société. La Société ne pourra être tenue responsable des conséquences dommageables d'une telle indisponibilité.
+La Société s'efforce d'assurer la continuité du service mais ne peut garantir une disponibilité ininterrompue de la plateforme. Des interruptions de service peuvent survenir pour des raisons de maintenance, de mise à jour ou en cas d'incidents techniques indépendants de la volonté de la Société. La Société ne pourra être tenue responsable des conséquences dommageables d'une telle indisponibilité.
 
 ### 7.4 Limitation générale
 
-Dans les limites autorisées par la loi applicable, la responsabilité de la Société au titre des présentes CGU est limitée au montant des sommes effectivement versées par l'Utilisateur à la Société au cours des douze mois précédant la survenance du dommage.
+Dans les limites autorisées par la loi applicable, la responsabilité de la Société au titre des présentes CGU est limitée au montant des sommes effectivement versées par l'Utilisateur à la Société au cours des douze (12) mois précédant la survenance du dommage.
 
 ## Article 8 - Propriété intellectuelle
 
 ### 8.1 Droits de la Société
 
-La plateforme Jloow, son interface, ses fonctionnalités, son algorithme de matching, ses logos, marques, textes, graphismes, et l'ensemble de ses composants sont la propriété exclusive de la Société et sont protégés par le droit de la propriété intellectuelle.
-
-Toute reproduction, représentation, modification, adaptation ou exploitation, totale ou partielle, sans autorisation expresse préalable de la Société, est strictement interdite.
+La plateforme Jloow, son interface, ses fonctionnalités, son algorithme de matching, ses logos, marques, textes, graphismes et l'ensemble de ses composants sont la propriété exclusive de la Société et sont protégés par le droit de la propriété intellectuelle. Toute reproduction, représentation, modification, adaptation ou exploitation, totale ou partielle, sans autorisation expresse préalable de la Société, est strictement interdite.
 
 ### 8.2 Licence accordée à l'Utilisateur
 
@@ -220,15 +262,15 @@ La Société accorde à l'Utilisateur, à titre personnel et non exclusif, une l
 
 ### 8.3 Contenu de l'Utilisateur
 
-L'Utilisateur conserve la propriété intellectuelle des contenus qu'il publie sur la plateforme. En publiant des contenus, il accorde à la Société une licence non exclusive, mondiale, gratuite, pour utiliser, reproduire, adapter et diffuser ces contenus aux seules fins du fonctionnement et de la promotion du service.
+L'Utilisateur conserve la propriété intellectuelle des contenus qu'il publie sur la plateforme. En publiant des contenus, il accorde à la Société une licence non exclusive, mondiale et gratuite, pour utiliser, reproduire, adapter et diffuser ces contenus aux seules fins du fonctionnement et de la promotion du service.
 
 ## Article 9 - Résiliation
 
 ### 9.1 Résiliation à l'initiative de l'Utilisateur
 
-L'Utilisateur peut résilier son compte à tout moment depuis les paramètres de son profil ou en adressant une demande par e-mail au support de la plateforme.
+L'Utilisateur peut résilier son compte à tout moment depuis les paramètres de son profil ou en adressant une demande par e-mail au support de la plateforme. La résiliation prend effet immédiatement pour l'accès aux fonctionnalités gratuites.
 
-La résiliation prend effet immédiatement pour l'accès aux fonctionnalités gratuites. Pour les abonnements payants, la résiliation prend effet à l'expiration de la période d'abonnement en cours, aucun remboursement au prorata n'étant accordé.
+Pour les abonnements payants, la résiliation prend effet à l'expiration de la période d'abonnement en cours, aucun remboursement au prorata n'étant accordé.
 
 ### 9.2 Résiliation à l'initiative de la Société
 
@@ -243,7 +285,7 @@ En cas de manquement grave, la résiliation peut intervenir sans préavis ni mis
 
 ### 9.3 Effets de la résiliation
 
-À compter de la résiliation, l'Utilisateur perd l'accès à son compte et à ses données. Les données sont conservées pendant la durée prévue dans la [Politique de Confidentialité](/politique-de-confidentialite), puis supprimées ou anonymisées. La résiliation ne libère pas l'Utilisateur de ses obligations financières nées antérieurement.
+À compter de la résiliation, l'Utilisateur perd l'accès à son compte et à ses données. Les données sont conservées pendant la durée prévue par la Politique de Confidentialité, puis supprimées ou anonymisées. La résiliation ne libère pas l'Utilisateur de ses obligations financières nées antérieurement.
 
 ## Article 10 - Droit applicable et règlement des litiges
 
@@ -277,10 +319,6 @@ Le fait pour la Société de ne pas se prévaloir d'un manquement par l'Utilisat
 
 Pour toute question relative aux présentes CGU ou au fonctionnement du service, l'Utilisateur peut contacter la Société :
 
-- Par e-mail : [support@jloow.com](mailto:support@jloow.com)
-- Pour les questions relatives aux données personnelles : [dpo@jloow.com](mailto:dpo@jloow.com)
+- Par e-mail : [support@jloow.com](mailto:support@jloow.com).
+- Pour les questions relatives aux données personnelles : [dpo@jloow.com](mailto:dpo@jloow.com).
 - Par courrier : Bloowing SAS, 28 place de la Bourse, 75002 Paris.
-
----
-
-Document établi par Bloowing SAS - SIREN : 832 548 788 - [dpo@jloow.com](mailto:dpo@jloow.com) - Version au 15 avril 2026.
