@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="28.04" height="22.02" viewBox="99.98 40.98 28.04 22.02"><ns0:g transform="translate(100,40)"><ns0:defs>
+    <ns0:g id="mark">
+      <ns0:g>
+        <ns0:path d="M21.801 10A10 10 0 1 1 17 3.335" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <ns0:path d="M9 11L12 14L22 4" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </ns0:g>
+    </ns0:g>
+    <ns0:g id="mark-front">
+      <ns0:g>
+        <ns0:path d="M21.801 10A10 10 0 1 1 17 3.335" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <ns0:path d="M9 11L12 14L22 4" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </ns0:g>
+    </ns0:g>
+  <ns0:g id="mark-front-left">
+      <ns0:g>
+        <ns0:path d="M21.801 10A10 10 0 1 1 17 3.335" fill="none" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" />
+        <ns0:path d="M9 11L12 14L22 4" fill="none" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" />
+      </ns0:g>
+    </ns0:g>
+  </ns0:defs>
+
+  
+  <ns0:g transform="translate(23.0,0.0) scale(-1,1)">
+    <ns0:use href="#mark-front-left" />
+  </ns0:g>
+
+  
+  <ns0:g transform="translate(5.0,0.0)">
+    <ns0:use href="#mark" />
+  </ns0:g>
+</ns0:g></ns0:svg>
