@@ -164,6 +164,11 @@ const journeyOptions: { key: JourneyType; label: string }[] = [
 
 const faqItems = [
   {
+    question: 'Qu’est que le Smart Matching ?',
+    answer:
+      'Le Smart Matching est une technologie basée sur l’IA qui analyse les profils, besoins et objectifs des participants pour proposer des mises en relation ultra-ciblées et pertinentes.\nSur JLOOW, il permet de transformer le networking en recommandations concrètes, appelées Drops, directement exploitables pour accélérer vos opportunités professionnelles.',
+  },
+  {
     question: 'Qu’est-ce qu’un Challenge ?',
     answer:
       'Un Challenge est un programme de networking structuré autour d’un thème (Grand Challenge), d’une personne (Smart Challenge) ou d’une communauté (Private Challenge).\nUn utilisateur Abonné peut sélectionner un ou plusieurs Challenges et bénéficier chaque mois de 6 mises en relation ciblées en cohérence avec sa sélection et les objectifs professionnels qu’il a renseignés sur JLOOW.\nUn utilisateur Non abonné ne peut pas sélectionner de Challenges.',
@@ -305,14 +310,14 @@ const currentPrograms: CurrentProgram[] = [
       {
         title: 'Le principe de ce programme',
         paragraphs: [
-          'Ce programme exclusif de smart matching basé sur l’IA, est conçu pour vous mettre en relation avec les personnes les plus pertinentes par rapport à vos besoins spécifiques. En vous inscrivant, vous bénéficiez de :',
+          'Ce programme exclusif de smart matching basé sur l’IA, est conçu pour vous mettre en relation avec les personnes les plus pertinentes par rapport à vos besoins spécifiques en cohérence avec la thématique de l’IA. En vous inscrivant, vous bénéficiez de :',
         ],
         items: [],
       },
     ],
     bullets: [
-      '6 Drops (suggestions de mises en relation qualifiées) sur mesure, alignées avec vos besoins et objectifs professionnels.',
-      'Un accès illimité à tous les événements organisés par nos partenaires pendant la durée de votre abonnement (1 mois ou 12 mois).',
+      'Une meilleure qualité des mises en relations que nous vous proposons, en privilégiant les contacts qui sélectionnent le(s) mêmes Challenges que vous.',
+      'Des tarifs privilégiés pour accéder à tous les événements partenaires associés à ce Challenge.',
     ],
   },
   {
@@ -363,8 +368,8 @@ const currentPrograms: CurrentProgram[] = [
       },
     ],
     bullets: [
-      '3 Drops hyperciblés, basés sur vos besoins et objectifs professionnels.',
-      'Un accès aux événements de ce Network Partner.',
+      'Une meilleure qualité des mises en relations que nous vous proposons, en privilégiant les contacts qui sélectionnent le(s) mêmes Challenges que vous.',
+      'Des tarifs privilégiés pour accéder aux événements associés à ce Challenge.',
     ],
   },
 ];
@@ -565,11 +570,13 @@ function renderCurrentProgramText(text: string) {
     '6',
     'écosystème unique',
     'votre programme',
+    'qualité des mises en relations',
+    'événements partenaires',
     ...(boldOpportunities ? ['opportunités'] : []),
     ...(boldEvents ? ['événements'] : []),
   ];
   const parts = text.split(
-    /(employabilité|business|changements|Drops|événements|3|6|écosystème unique|opportunités|votre programme)/gi
+    /(employabilité|business|changements|Drops|qualité des mises en relations|événements partenaires|événements|3|6|écosystème unique|opportunités|votre programme)/gi
   );
 
   return parts.map((part, index) =>
@@ -661,6 +668,14 @@ export default function HomePage() {
       }
 
       if (activePillar === 'cibler') {
+        if (activeJourney === 'non-abonne') {
+          return {
+            src: '/section-2-reserver-non-abonne.png',
+            alt: 'Réservation directe à un événement de networking',
+            className: 'object-cover',
+          };
+        }
+
         return {
           src: '/section-2-formules-adaptees.png',
           alt: 'Formules adaptées pour un programme de networking',
@@ -674,7 +689,7 @@ export default function HomePage() {
         className: 'object-cover',
       };
     },
-    [activePillar]
+    [activeJourney, activePillar]
   );
   const answeredQuizCount = Object.keys(quizAnswers).length;
   const isQuizComplete = answeredQuizCount === quizItems.length;
