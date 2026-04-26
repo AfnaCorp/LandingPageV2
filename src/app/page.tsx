@@ -31,7 +31,9 @@ import {
   UsersRound,
   ClipboardCheck,
   ArrowRight,
+  ChevronDown,
   Handshake,
+  ThumbsUp,
   Loader2,
   X,
 } from 'lucide-react';
@@ -78,12 +80,12 @@ const pillars = [
   {
     key: 'cibler',
     title: '2. Sélectionner',
-    tagline: 'Choisissez votre formule selon vos affinités',
+    tagline: 'Sélectionnez vos Challenges selon vos affinités',
     icon: Goal,
     bullets: [
       'Programmes Grand Challenge thématiques selon une fonction, un métier, un secteur d’activité',
       'Programmes Smart Challenge, autour d’un individu, ou Private Challenge, autour d’une communauté',
-      'Événements partenaires dans le cadre des programmes Grand Challenge ou Smart Challenge',
+      'Tarifs privilégiés pour les événements Matchs dans le cadre des programmes Grand Challenge ou Smart Challenge',
     ],
   },
   {
@@ -92,9 +94,45 @@ const pillars = [
     tagline: 'On vous connecte avec les personnes les plus pertinentes',
     icon: UsersRound,
     bullets: [
-      'Mises en relation qualifiées, générées par l’IA à partir de votre profil et des formules sélectionnées',
-      'Suivi et engagement de vos contacts depuis votre tableau de bord sur Jloow',
+      'Mises en relation qualifiées (Drops), générées par l’IA à partir de votre profil et des formules sélectionnées',
+      '6 Drops en cohérence avec les Challenges sélectionnés + 2 à 6 Drops à chaque événement auquel vous êtes inscrit',
       'Génération d’opportunités professionnelles et business pour accélérer vos objectifs',
+    ],
+  },
+];
+
+const nonSubscriberPillars = [
+  {
+    key: 'rejoindre',
+    title: '1. Rejoindre',
+    tagline: 'Complétez le quiz pour finaliser votre inscription',
+    icon: LogIn,
+    bullets: [
+      'Votre profil (besoins, parcours, apports)',
+      'Vos communautés (associations d’alumni, clubs d’entrepreneurs...)',
+      'Vos événements de networking (conférences, salons, meetups...)',
+    ],
+  },
+  {
+    key: 'cibler',
+    title: '2. Réserver',
+    tagline: 'Accédez directement aux événements',
+    icon: Goal,
+    bullets: [
+      'Vous pouvez vous inscrire aux événements Matchs avec le tarif Public',
+      'Vous ne pouvez pas sélectionner de Challenges',
+      'Vous ne pouvez pas bénéficier du tarif Abonné',
+    ],
+  },
+  {
+    key: 'engager',
+    title: '3. Engager',
+    tagline: 'On vous connecte avec les personnes les plus pertinentes',
+    icon: UsersRound,
+    bullets: [
+      'Mises en relation qualifiées (Drops), générées par l’IA à partir de votre profil',
+      '2 à 6 Drops lors de chaque événement auquel vous êtes inscrit',
+      'Vous ne bénéficiez pas des 6 Drops supplémentaires inclus dans le parcours Abonné',
     ],
   },
 ];
@@ -116,6 +154,57 @@ const bottomItems = [
     icon: Handshake,
   },
 ];
+
+type JourneyType = 'abonne' | 'non-abonne';
+
+const journeyOptions: { key: JourneyType; label: string }[] = [
+  { key: 'abonne', label: 'Abonné' },
+  { key: 'non-abonne', label: 'Non abonné' },
+];
+
+const faqItems = [
+  {
+    question: 'Qu’est-ce qu’un Challenge ?',
+    answer:
+      'Un Challenge est un programme de networking structuré autour d’un thème (Grand Challenge), d’une personne (Smart Challenge) ou d’une communauté (Private Challenge).\nUn utilisateur Abonné peut sélectionner un ou plusieurs Challenges et bénéficier chaque mois de 6 mises en relation ciblées en cohérence avec sa sélection et les objectifs professionnels qu’il a renseignés sur JLOOW.\nUn utilisateur Non abonné ne peut pas sélectionner de Challenges.',
+  },
+  {
+    question: 'Qu’est-ce qu’un Match ?',
+    answer:
+      'Un Match est un événement organisé en lien avec un Challenge.\nUn utilisateur Abonné bénéficie du tarif Abonné pour participer aux Matchs et reçoit 2 à 6 mises en relation ciblées supplémentaires pour chaque événement auquel il est inscrit.\nUn utilisateur Non abonné peut réserver directement un Match au tarif Public et bénéficier des mises en relation ciblées.',
+  },
+  {
+    question: 'Qu’est-ce qu’un Drop ?',
+    answer:
+      'Un Drop est une proposition de mise en relation ultra ciblée en 1to1, généré par l’IA de JLOOW, pour chaque utilisateur.\nUn utilisateur Abonné bénéficie chaque mois de 6 Drops en cohérence avec les Challenges sélectionnés, ainsi que de 2 à 6 Drops supplémentaires pour chaque Match auquel il est inscrit.\nUn utilisateur Non abonné bénéficie uniquement des Drops liés aux Matchs auxquels il est inscrit.',
+  },
+  {
+    question: 'Quelle est la différence entre Abonné et Non abonné ?',
+    answer:
+      'La différence entre Abonné et Non abonné se situe au niveau de l’accès aux Challenges, aux tarifs privilégiés et au volume de mises en relation ciblées.\nUn utilisateur Abonné peut sélectionner un ou plusieurs Challenges, recevoir 6 Drops chaque mois et bénéficier du tarif Abonné pour participer aux Matchs.\nUn utilisateur Non abonné peut réserver directement un Match au tarif Public, mais ne peut pas sélectionner de Challenges ni bénéficier des 6 Drops mensuels supplémentaires.',
+  },
+  {
+    question: 'Comment puis-je devenir Abonné ?',
+    answer:
+      'Pour devenir Abonné, un utilisateur doit d’abord compléter le quiz JLOOW, pour s’assurer que la solution lui convient, et s’inscrire sur plateforme.\nUne fois connecté, il peut souscrire à un abonnement.\nLa liste des abonnements et le détail des tarifs sont disponibles dans l’environnement de l’utilisateur connecté.\nActuellement, JLOOW propose l’abonnement Pass Universel au tarif mensuel de 13.50 € TTC (avec un engagement de 12 mois) et de 18.00 € TTC (sans engagement) incluant une remise de 50% pour toutes souscriptions en avril 2026.',
+  },
+  {
+    question: 'Puis-je sélectionner plusieurs Challenges ?',
+    answer:
+      'Oui, si je suis Abonné. Sélectionner plusieurs Challenges permet d’activer de manière plus qualifiée mon réseau autour de plusieurs thèmes, personnes ou communautés.\nNon, si je ne suis pas Abonné. Dans ce cas, je ne peux sélectionner de Challenges.',
+  },
+  {
+    question: 'Comment puis-je m’inscrire ?',
+    answer:
+      'Pour s’inscrire, un utilisateur doit d’abord compléter le quiz JLOOW, pour s’assurer que la solution lui convient, puis créer son compte sur la plateforme.\nUne fois inscrit, l’utilisateur peut devenir Abonné en souscrivant à l’abonnement qui lui convient. Puis il peut sélectionner un ou plusieurs Challenges, bénéficier des Drops inclus dans son parcours et des tarifs privilégiés pour les Matchs.\nUn utilisateur Non abonné peut accéder directement à la réservation d’un Match au tarif Public.',
+  },
+];
+
+const copyEmailToClipboard = (email: string) => {
+  void navigator.clipboard.writeText(email);
+};
+
+const getEmailFromMailto = (href: string) => href.replace(/^mailto:/, '').split('?')[0];
 
 const quizItems = [
   {
@@ -222,7 +311,7 @@ const currentPrograms: CurrentProgram[] = [
       },
     ],
     bullets: [
-      '6 drops (suggestions de mises en relation qualifiées) sur mesure, alignées avec vos besoins et objectifs professionnels.',
+      '6 Drops (suggestions de mises en relation qualifiées) sur mesure, alignées avec vos besoins et objectifs professionnels.',
       'Un accès illimité à tous les événements organisés par nos partenaires pendant la durée de votre abonnement (1 mois ou 12 mois).',
     ],
   },
@@ -234,7 +323,7 @@ const currentPrograms: CurrentProgram[] = [
     imageAlt: 'Evénement de networking JLOOW x Dany Dubray',
     hideImage: true,
     description:
-      '🌟 Networker au sein du réseau unique du fondateur de Jloow',
+      '🌟 Networker au sein du réseau unique du fondateur de JLOOW',
     presentationSections: [
       {
         title: 'Pourquoi rejoindre ce programme ?',
@@ -274,7 +363,7 @@ const currentPrograms: CurrentProgram[] = [
       },
     ],
     bullets: [
-      '3 drops hyperciblés, basés sur vos besoins et objectifs professionnels.',
+      '3 Drops hyperciblés, basés sur vos besoins et objectifs professionnels.',
       'Un accès aux événements de ce Network Partner.',
     ],
   },
@@ -291,7 +380,7 @@ const formulas = [
         label: '',
         value: {
           primary: 'Module principal',
-          aside: '6 drops1 / mois',
+          aside: '6 Drops1 / mois',
           secondary: ['Asynchrone', 'Visio ou présentiel', 'Flexibilité'],
         },
       },
@@ -299,7 +388,7 @@ const formulas = [
         label: '',
         value: {
           primary: 'Événements partenaires',
-          aside: '+2 drops2 / événement',
+          aside: '+2 Drops2 / événement',
           secondary: ['Synchrone', 'Présentiel', 'Richesse du présentiel'],
         },
       },
@@ -327,7 +416,7 @@ const formulas = [
         label: '',
         value: {
           primary: 'Module principal',
-          aside: '3 drops1 / programme',
+          aside: '3 Drops1 / programme',
           secondary: ['Asynchrone', 'Visio ou présentiel', 'Flexibilité'],
         },
       },
@@ -335,13 +424,13 @@ const formulas = [
         label: '',
         value: {
           primary: 'Événements (optionnel)',
-          aside: '+2 drops2 / événement',
+          aside: '+2 Drops2 / événement',
           secondary: ['Synchrone', 'Présentiel', 'Richesse du présentiel'],
         },
       },
     ],
     description:
-      'L’inscription à un Smart Challenge nécessite un Pass Universel, qui donne accès jusqu’à 5 Smart Challenges. Toute personne physique peut aussi devenir Network Partner, créer son propre Smart Challenge et l’ouvrir à son réseau. Chaque participant, Network Partner inclus, complète son profil afin de recevoir des drops alignés sur ses besoins.',
+      'L’inscription à un Smart Challenge nécessite un Pass Universel, qui donne accès jusqu’à 5 Smart Challenges. Toute personne physique peut aussi devenir Network Partner, créer son propre Smart Challenge et l’ouvrir à son réseau. Chaque participant, Network Partner inclus, complète son profil afin de recevoir des Drops alignés sur ses besoins.',
     partnerCta: {
       icon: '📩',
       label: 'Devenir Network Partner pour organiser un Smart Challenge.',
@@ -394,12 +483,10 @@ const formulas = [
 
 function renderDropLabel(text: string) {
   if (
-    !text.includes('drops1') &&
-    !text.includes('drops2') &&
     !text.includes('Drops1') &&
     !text.includes('Drops2') &&
-    !text.includes('drop1') &&
-    !text.includes('drop2')
+    !text.includes('Drop1') &&
+    !text.includes('Drop2')
   ) {
     return text;
   }
@@ -408,15 +495,11 @@ function renderDropLabel(text: string) {
     ? 'Drops2'
     : text.includes('Drops1')
       ? 'Drops1'
-      : text.includes('drops2')
-    ? 'drops2'
-    : text.includes('drops1')
-      ? 'drops1'
-      : text.includes('drop2')
-        ? 'drop2'
-        : 'drop1';
+      : text.includes('Drop2')
+        ? 'Drop2'
+        : 'Drop1';
   const exponent = marker.endsWith('2') ? '2' : '1';
-  const baseLabel = marker.startsWith('Drops') ? 'Drops' : marker.startsWith('drops') ? 'drops' : 'drop';
+  const baseLabel = marker.startsWith('Drops') ? 'Drops' : 'Drop';
   const [before, ...afterParts] = text.split(marker);
   const after = afterParts.join(marker);
 
@@ -460,12 +543,13 @@ function renderCurrentProgramText(text: string) {
     return (
       <>
         🤝{' '}
-        <a
-          href="mailto:communication@jloow.com?subject=Devenir%20Network%20Partner"
+        <button
+          type="button"
+          onClick={() => copyEmailToClipboard('communication@jloow.com')}
           className="font-semibold text-primary underline underline-offset-4"
         >
           Devenir Network Partner.
-        </a>
+        </button>
       </>
     );
   }
@@ -476,7 +560,7 @@ function renderCurrentProgramText(text: string) {
     'employabilité',
     'business',
     'changements',
-    'drops',
+    'Drops',
     '3',
     '6',
     'écosystème unique',
@@ -485,7 +569,7 @@ function renderCurrentProgramText(text: string) {
     ...(boldEvents ? ['événements'] : []),
   ];
   const parts = text.split(
-    /(employabilité|business|changements|drops|événements|3|6|écosystème unique|opportunités|votre programme)/gi
+    /(employabilité|business|changements|Drops|événements|3|6|écosystème unique|opportunités|votre programme)/gi
   );
 
   return parts.map((part, index) =>
@@ -506,6 +590,9 @@ function renderPillarBulletText(text: string) {
     'événements',
     'partenaires',
     'Mises en relation qualifiées',
+    'Tarifs privilégiés',
+    'Drops',
+    'événements Matchs',
     'Suivi',
     'opportunités',
     ...(text.startsWith('Programmes Grand Challenge') ? ['Grand Challenge'] : []),
@@ -513,7 +600,7 @@ function renderPillarBulletText(text: string) {
   ];
 
   const parts = text.split(
-    /(Mises en relation qualifiées|Smart Challenge|Private Challenge|Grand Challenge|communautés|événements|partenaires|opportunités|profil|Suivi)/gi
+    /(Mises en relation qualifiées|Tarifs privilégiés|événements Matchs|Smart Challenge|Private Challenge|Grand Challenge|communautés|événements|partenaires|opportunités|profil|Drops|Suivi)/gi
   );
 
   return parts.map((part, index) =>
@@ -529,21 +616,39 @@ function renderPillarBulletText(text: string) {
 
 export default function HomePage() {
   const [activeNavSection, setActiveNavSection] = useState<
-    'home' | 'actualites' | 'fonctionnement' | 'quiz' | 'formules' | null
+    'home' | 'actualites' | 'fonctionnement' | 'quiz' | 'faq' | null
   >('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMentionsOpen, setIsMentionsOpen] = useState(false);
   const [isMentionsLoading, setIsMentionsLoading] = useState(false);
   const [mentionsContent, setMentionsContent] = useState('');
   const [mentionsError, setMentionsError] = useState<string | null>(null);
+  const [activeJourney, setActiveJourney] = useState<JourneyType>('abonne');
   const [activePillar, setActivePillar] = useState<(typeof pillars)[number]['key']>('rejoindre');
   const [quizAnswers, setQuizAnswers] = useState<Record<number, string>>({});
   const [activeCurrentProgram, setActiveCurrentProgram] = useState(0);
   const [activeFormula, setActiveFormula] = useState(0);
+  const [openFaqIndex, setOpenFaqIndex] = useState(0);
+  const [faqSatisfactionCounts, setFaqSatisfactionCounts] = useState<Record<number, number>>({});
+  const [satisfiedFaqIndexes, setSatisfiedFaqIndexes] = useState<Record<number, boolean>>({});
 
+  const activeJourneyPillars = useMemo(
+    () => (activeJourney === 'abonne' ? pillars : nonSubscriberPillars),
+    [activeJourney]
+  );
   const activePillarData = useMemo(
-    () => pillars.find((pillar) => pillar.key === activePillar) ?? pillars[0],
-    [activePillar]
+    () => activeJourneyPillars.find((pillar) => pillar.key === activePillar) ?? activeJourneyPillars[0],
+    [activeJourneyPillars, activePillar]
+  );
+  const isSubscriberJourney = activeJourney === 'abonne';
+  const activeBottomItems = useMemo(
+    () =>
+      bottomItems.map((item) =>
+        activeJourney === 'non-abonne' && item.key === 'cibler'
+          ? { ...item, title: 'Formule unique' }
+          : item
+      ),
+    [activeJourney]
   );
   const activePillarImage = useMemo(
     () => {
@@ -631,7 +736,7 @@ export default function HomePage() {
         tone: 'warning' as const,
         title: 'Votre profil semble peu aligné avec la plateforme',
         message:
-          'Vos réponses montrent un usage plutôt ponctuel du networking. Jloow est conçu pour les personnes qui veulent en faire une routine structurée et performante.',
+          'Vos réponses montrent un usage plutôt ponctuel du networking. JLOOW est conçu pour les personnes qui veulent en faire une routine structurée et performante.',
       };
     }
 
@@ -644,8 +749,8 @@ export default function HomePage() {
             : 'Votre profil semble pertinent, avec un point de vigilance',
         message:
           reservedAnswersCount === 1
-            ? 'Une de vos réponses appelle une réserve. Votre profil reste pertinent pour Jloow si vous souhaitez rendre votre networking plus structuré, plus régulier et plus performant.'
-            : 'Certaines de vos réponses appellent une réserve. Jloow peut vous convenir si vous voulez passer d’un networking encore partiellement opportuniste à une routine plus structurée et plus performante.',
+            ? 'Une de vos réponses appelle une réserve. Votre profil reste pertinent pour JLOOW si vous souhaitez rendre votre networking plus structuré, plus régulier et plus performant.'
+            : 'Certaines de vos réponses appellent une réserve. JLOOW peut vous convenir si vous voulez passer d’un networking encore partiellement opportuniste à une routine plus structurée et plus performante.',
       };
     }
 
@@ -654,13 +759,13 @@ export default function HomePage() {
         tone: 'warning' as const,
         title: 'Votre profil semble peu aligné avec la plateforme',
         message:
-          'Vos réponses montrent un usage plutôt ponctuel du networking. Jloow est conçu pour les personnes qui veulent en faire une routine structurée et performante.',
+          'Vos réponses montrent un usage plutôt ponctuel du networking. JLOOW est conçu pour les personnes qui veulent en faire une routine structurée et performante.',
       };
     }
 
     return {
       tone: 'success' as const,
-      title: 'Votre profil correspond bien à l’approche Jloow',
+      title: 'Votre profil correspond bien à l’approche JLOOW',
       message:
         'Vous recherchez une démarche de networking plus structurée, plus régulière et plus performante.',
     };
@@ -707,14 +812,34 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    try {
+      const storedSatisfiedIndexes = window.localStorage.getItem('jloow-faq-satisfied-indexes');
+      if (!storedSatisfiedIndexes) {
+        return;
+      }
+
+      const parsedSatisfiedIndexes = JSON.parse(storedSatisfiedIndexes);
+      if (
+        parsedSatisfiedIndexes &&
+        typeof parsedSatisfiedIndexes === 'object' &&
+        !Array.isArray(parsedSatisfiedIndexes)
+      ) {
+        setSatisfiedFaqIndexes(parsedSatisfiedIndexes as Record<number, boolean>);
+      }
+    } catch {
+      // Ignore unavailable localStorage.
+    }
+  }, []);
+
+  useEffect(() => {
     const updateActiveSection = () => {
       const homeSection = document.getElementById('home');
       const programmesSection = document.getElementById('programmes-en-cours');
       const commentCaMarcheSection = document.getElementById('comment-ca-marche');
       const quizSection = document.getElementById('quiz');
-      const formulesSection = document.getElementById('formules');
+      const faqSection = document.getElementById('faq');
 
-      if (!homeSection || !programmesSection || !commentCaMarcheSection || !quizSection || !formulesSection) {
+      if (!homeSection || !programmesSection || !commentCaMarcheSection || !quizSection || !faqSection) {
         return;
       }
 
@@ -723,7 +848,7 @@ export default function HomePage() {
         { key: 'actualites' as const, rect: programmesSection.getBoundingClientRect() },
         { key: 'fonctionnement' as const, rect: commentCaMarcheSection.getBoundingClientRect() },
         { key: 'quiz' as const, rect: quizSection.getBoundingClientRect() },
-        { key: 'formules' as const, rect: formulesSection.getBoundingClientRect() },
+        { key: 'faq' as const, rect: faqSection.getBoundingClientRect() },
       ];
 
       const headerOffset = 56;
@@ -772,7 +897,7 @@ export default function HomePage() {
     window.requestAnimationFrame(step);
   };
 
-  const scrollToSection = (sectionId: 'home' | 'programmes-en-cours' | 'comment-ca-marche' | 'quiz' | 'formules') => {
+  const scrollToSection = (sectionId: 'home' | 'programmes-en-cours' | 'comment-ca-marche' | 'quiz' | 'faq') => {
     if (sectionId === 'home') {
       smoothScrollTo(0);
       setActiveNavSection('home');
@@ -790,7 +915,7 @@ export default function HomePage() {
     const PROGRAMMES_TOP_PADDING = 0;
     const COMMENT_CA_MARCHE_TOP_PADDING = 70;
     const QUIZ_TOP_PADDING = -52;
-    const FORMULES_TOP_PADDING = 0;
+    const FAQ_TOP_PADDING = 0;
     const targetEl = sectionId === 'quiz' ? section : title ?? section;
     const sectionTopPadding =
       sectionId === 'programmes-en-cours'
@@ -799,7 +924,7 @@ export default function HomePage() {
           ? COMMENT_CA_MARCHE_TOP_PADDING
           : sectionId === 'quiz'
             ? QUIZ_TOP_PADDING
-            : FORMULES_TOP_PADDING;
+            : FAQ_TOP_PADDING;
     const targetOffset = HEADER_OFFSET + sectionTopPadding;
     const top = targetEl.getBoundingClientRect().top + window.scrollY - targetOffset;
 
@@ -870,7 +995,7 @@ export default function HomePage() {
                 { id: 'programmes-en-cours', nav: 'actualites', label: 'Actualités' },
                 { id: 'comment-ca-marche', nav: 'fonctionnement', label: 'Fonctionnement' },
                 { id: 'quiz', nav: 'quiz', label: 'Quiz' },
-                { id: 'formules', nav: 'formules', label: 'Formules' },
+                { id: 'faq', nav: 'faq', label: 'FAQ' },
               ].map((item) => {
                 const isActive = activeNavSection === item.nav;
                 return (
@@ -879,7 +1004,7 @@ export default function HomePage() {
                     href={`#${item.id}`}
                     onClick={(event) => {
                       event.preventDefault();
-                      scrollToSection(item.id as 'programmes-en-cours' | 'comment-ca-marche' | 'quiz' | 'formules');
+                      scrollToSection(item.id as 'programmes-en-cours' | 'comment-ca-marche' | 'quiz' | 'faq');
                     }}
                     className={cn(
                       'group relative text-xs md:text-sm xl:text-base font-semibold leading-6 transition',
@@ -1029,14 +1154,14 @@ export default function HomePage() {
                     </a>
 
                     <a
-                      href="#formules"
+                      href="#faq"
                       onClick={(event) => {
                         event.preventDefault();
-                        scrollToSection('formules');
+                        scrollToSection('faq');
                       }}
                       className="-mx-3 block w-full rounded-lg px-3 py-2 text-left text-base font-semibold leading-7 text-foreground hover:bg-muted"
                     >
-                      Formules
+                      FAQ
                     </a>
 
                     <a
@@ -1168,7 +1293,7 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="mt-auto pb-10 sm:pb-12">
+                  <div className="mt-auto pt-8 pb-10 sm:pt-10 sm:pb-12 lg:pt-12">
                     <div className="mb-6 flex justify-center">
                       <div
                         className="animate-jloow-fade-up relative inline-flex w-full max-w-5xl justify-center overflow-hidden rounded-2xl border border-white/10 px-8 py-3 text-center backdrop-blur-md"
@@ -1189,7 +1314,7 @@ export default function HomePage() {
                             fontStyle: 'italic',
                           }}
                         >
-                          Des programmes et des rencontres 1:1 ultra-ciblées pour atteindre vos objectifs pro
+                          Programmes et rencontres ultra ciblées en 1to1
                         </p>
                       </div>
                     </div>
@@ -1230,18 +1355,20 @@ export default function HomePage() {
             <div className="pointer-events-none absolute bottom-10 right-10 -z-10 h-64 w-64 rounded-full bg-[#4169E1]/10 blur-3xl animate-jloow-float-slow" />
 
             <div className="mx-auto flex w-full max-w-7xl flex-col justify-center px-6 pb-14 pt-16 sm:pb-16 sm:pt-20 lg:px-8">
-              <Reveal className="mx-auto max-w-3xl text-center">
+              <Reveal className="mx-auto max-w-5xl text-center">
                 <h2
-                  className="font-bold text-foreground"
+                  className="font-bold text-foreground lg:whitespace-nowrap"
                   style={{
-                    fontSize: 'clamp(2.2rem, 3.6vw, 3.15rem)',
+                    fontSize: 'clamp(2rem, 3.1vw, 3rem)',
                     lineHeight: '1.15',
                   }}
                 >
-                  Programmes <span className="jloow-gradient-text">en cours</span>
+                  En mai, <span className="jloow-gradient-text">2 Challenges et 3 Matchs</span>
                 </h2>
                 <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-[#8A2BE2] to-[#4169E1]" />
-
+                <p className="mt-4 text-sm text-muted-foreground sm:text-base">
+                  Découvrez nos programmes en cours et les événements associés
+                </p>
               </Reveal>
 
               <Reveal className="mx-auto mt-8 flex w-full max-w-7xl items-center gap-3 lg:gap-5" direction="up" delay={80}>
@@ -1502,32 +1629,91 @@ export default function HomePage() {
 
           <section id="comment-ca-marche" className="relative min-h-[100svh] scroll-mt-12 flex items-stretch overflow-hidden">
             <div className="pointer-events-none absolute inset-0 -z-10">
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(248,246,255,0.94)_100%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(243,250,247,0.96)_0%,rgba(255,255,255,0.98)_18%,rgba(248,246,255,0.94)_100%)]" />
               <div className="absolute -top-20 right-1/4 h-64 w-64 rounded-full bg-[#8A2BE2]/8 blur-3xl animate-jloow-float" />
               <div className="absolute bottom-10 left-1/4 h-72 w-72 rounded-full bg-[#4169E1]/8 blur-3xl animate-jloow-float-slow" />
             </div>
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/80 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-emerald-50/80 to-transparent" />
 
             <div className="mx-auto flex w-full max-w-7xl flex-col justify-center px-6 pb-14 pt-16 sm:pb-16 sm:pt-20 lg:px-8">
-              <Reveal className="mx-auto max-w-3xl text-center">
+              <Reveal className="mx-auto max-w-5xl text-center">
                 <h2
-                  className="font-bold text-foreground scroll-mt-24"
+                  className="font-bold text-foreground scroll-mt-24 xl:whitespace-nowrap"
                   style={{
-                    fontSize: 'clamp(2.2rem, 3.6vw, 3.15rem)',
+                    fontSize: 'clamp(2rem, 3vw, 3rem)',
                     lineHeight: '1.15',
                   }}
                 >
-                  Comment <span className="jloow-gradient-text">ça marche</span>&nbsp;?
+                  2 parcours : <span className="jloow-gradient-text">Abonné VS Non abonné</span>
                 </h2>
                 <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-[#8A2BE2] to-[#4169E1]" />
                 <p className="mt-4 text-sm text-muted-foreground sm:text-base">
-                  Trois étapes simples pour transformer votre networking en routine performante.
+                  Choisissez celui qui vous convient selon vos objectifs et vos ambitions
                 </p>
               </Reveal>
 
               <div className="mt-10 mx-auto w-full max-w-6xl">
+                <Reveal className="flex justify-center px-2 sm:px-4" direction="up" delay={60}>
+                  <div
+                    className={cn(
+                      'relative z-10 inline-flex items-center gap-1 rounded-2xl border bg-white/85 p-1 shadow-sm backdrop-blur',
+                      isSubscriberJourney ? 'border-emerald-200/80' : 'border-border/60'
+                    )}
+                    aria-label="Choix du parcours"
+                  >
+                    {journeyOptions.map((option) => {
+                      const isActive = option.key === activeJourney;
+                      const isSubscriberOption = option.key === 'abonne';
+
+                      return (
+                        <button
+                          key={option.key}
+                          type="button"
+                          onClick={() => setActiveJourney(option.key)}
+                          className={cn(
+                            'relative overflow-hidden rounded-xl px-5 py-2 text-sm font-semibold transition-all duration-300',
+                            'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
+                            isActive
+                              ? 'text-white shadow-[0_10px_28px_-12px_rgba(16,185,129,0.55)]'
+                              : 'text-muted-foreground hover:text-foreground'
+                          )}
+                        >
+                          {isActive ? (
+                            <>
+                              <span
+                                className={cn(
+                                  'absolute inset-0',
+                                  isSubscriberOption
+                                    ? 'bg-gradient-to-r from-emerald-500 to-green-600'
+                                    : 'bg-gradient-to-r from-[#8A2BE2] to-[#4169E1]'
+                                )}
+                              />
+                              <span
+                                className={cn(
+                                  'absolute -inset-1 blur-md',
+                                  isSubscriberOption
+                                    ? 'bg-gradient-to-r from-emerald-400/40 to-green-500/40'
+                                    : 'bg-gradient-to-r from-[#8A2BE2]/40 to-[#4169E1]/40'
+                                )}
+                              />
+                            </>
+                          ) : null}
+                          <span className="relative">{option.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </Reveal>
+
                 <Reveal className="flex justify-center px-2 sm:px-4" direction="up" delay={80}>
-                  <div className="relative z-10 inline-flex items-center gap-1 rounded-2xl border border-border/60 bg-white/80 p-1 shadow-sm backdrop-blur">
-                    {pillars.map((p, pIndex) => {
+                  <div
+                    className={cn(
+                      'relative z-10 mt-4 inline-flex items-center gap-1 rounded-2xl border bg-white/80 p-1 shadow-sm backdrop-blur',
+                      isSubscriberJourney ? 'border-emerald-200/80' : 'border-border/60'
+                    )}
+                  >
+                    {activeJourneyPillars.map((p, pIndex) => {
                       const Icon = p.icon;
                       const isActive = p.key === activePillar;
 
@@ -1546,15 +1732,33 @@ export default function HomePage() {
                         >
                           {isActive && (
                             <>
-                              <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#8A2BE2] to-[#4169E1] shadow-[0_8px_24px_-10px_rgba(91,33,182,0.6)]" />
-                              <span className="absolute -inset-1 rounded-xl bg-gradient-to-r from-[#8A2BE2]/30 to-[#4169E1]/30 blur-md" />
+                              <span
+                                className={cn(
+                                  'absolute inset-0 rounded-xl shadow-[0_8px_24px_-10px_rgba(91,33,182,0.6)]',
+                                  isSubscriberJourney
+                                    ? 'bg-gradient-to-r from-emerald-500 to-green-600'
+                                    : 'bg-gradient-to-r from-[#8A2BE2] to-[#4169E1]'
+                                )}
+                              />
+                              <span
+                                className={cn(
+                                  'absolute -inset-1 rounded-xl blur-md',
+                                  isSubscriberJourney
+                                    ? 'bg-gradient-to-r from-emerald-400/30 to-green-500/30'
+                                    : 'bg-gradient-to-r from-[#8A2BE2]/30 to-[#4169E1]/30'
+                                )}
+                              />
                             </>
                           )}
 
                           <span className="relative inline-flex items-center gap-2">
                             <span className={cn(
                               'inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold tabular-nums transition',
-                              isActive ? 'bg-white/25 text-white' : 'bg-primary/10 text-primary'
+                              isActive
+                                ? 'bg-white/25 text-white'
+                                : isSubscriberJourney
+                                  ? 'bg-emerald-100 text-emerald-700'
+                                  : 'bg-primary/10 text-primary'
                             )}>
                               {pIndex + 1}
                             </span>
@@ -1569,17 +1773,39 @@ export default function HomePage() {
 
                 <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]">
                   <div
-                    key={`pillar-text-${activePillar}`}
-                    className="jloow-swap relative min-h-[320px] sm:min-h-[340px] lg:min-h-[360px] overflow-hidden rounded-3xl bg-white/85 border border-border/60 p-6 sm:p-8 shadow-[0_20px_80px_-40px_hsl(var(--foreground)/0.2)]"
+                    key={`pillar-text-${activeJourney}-${activePillar}`}
+                    className={cn(
+                      'jloow-swap relative min-h-[320px] overflow-hidden rounded-3xl bg-white/85 p-6 shadow-[0_20px_80px_-40px_hsl(var(--foreground)/0.2)] sm:min-h-[340px] sm:p-8 lg:min-h-[360px]',
+                      isSubscriberJourney ? 'border border-emerald-200/80' : 'border border-border/60'
+                    )}
                   >
-                    <div className="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-gradient-to-tr from-[#8A2BE2]/25 to-[#4169E1]/25 blur-2xl animate-jloow-float" />
-                    <div className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-gradient-to-tr from-[#4169E1]/18 to-[#8A2BE2]/18 blur-2xl animate-jloow-float-slow" />
+                    <div
+                      className={cn(
+                        'absolute -top-24 -right-24 h-56 w-56 rounded-full blur-2xl animate-jloow-float',
+                        isSubscriberJourney
+                          ? 'bg-gradient-to-tr from-emerald-400/25 to-green-500/25'
+                          : 'bg-gradient-to-tr from-[#8A2BE2]/25 to-[#4169E1]/25'
+                      )}
+                    />
+                    <div
+                      className={cn(
+                        'absolute -bottom-20 -left-20 h-48 w-48 rounded-full blur-2xl animate-jloow-float-slow',
+                        isSubscriberJourney
+                          ? 'bg-gradient-to-tr from-green-500/18 to-emerald-400/18'
+                          : 'bg-gradient-to-tr from-[#4169E1]/18 to-[#8A2BE2]/18'
+                      )}
+                    />
 
                     <div className="relative">
                       <div className="flex items-start justify-between gap-4">
                         <div>
                           <div className="inline-flex items-center gap-2">
-                            <span className="text-6xl font-bold leading-none jloow-gradient-text">
+                            <span
+                              className={cn(
+                                'text-6xl font-bold leading-none',
+                                isSubscriberJourney ? 'text-emerald-600' : 'jloow-gradient-text'
+                              )}
+                            >
                               {activePillarData.title.split('.')[0]}
                             </span>
                             <div className="flex flex-col">
@@ -1594,32 +1820,59 @@ export default function HomePage() {
                           <h3 className="mt-4 text-xl sm:text-2xl font-bold text-foreground">
                             {activePillarData.tagline}
                           </h3>
-                          <div className="mt-3 h-px w-24 bg-gradient-to-r from-[#8A2BE2]/60 to-[#4169E1]/60" />
+                          <div
+                            className={cn(
+                              'mt-3 h-px w-24',
+                              isSubscriberJourney
+                                ? 'bg-gradient-to-r from-emerald-500/70 to-green-600/70'
+                                : 'bg-gradient-to-r from-[#8A2BE2]/60 to-[#4169E1]/60'
+                            )}
+                          />
                         </div>
                       </div>
 
                       <ul className="mt-5 space-y-3 text-foreground">
-                        {activePillarData.bullets.map((b, bIndex) => (
-                          <li
-                            key={b}
-                            className="animate-jloow-fade-up flex gap-3"
-                            style={{ animationDelay: `${120 + bIndex * 100}ms` }}
-                          >
-                            <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8A2BE2] to-[#4169E1] text-white shadow-sm shadow-primary/20">
-                              <CheckCircle className="h-3.5 w-3.5" />
-                            </span>
-                            <span className="text-sm sm:text-base leading-relaxed">
-                              {renderPillarBulletText(b)}
-                            </span>
-                          </li>
-                        ))}
+                        {activePillarData.bullets.map((b, bIndex) => {
+                          const shouldShowRestrictionIcon =
+                            activeJourney === 'non-abonne' &&
+                            ((activePillarData.key === 'cibler' && bIndex > 0) ||
+                              (activePillarData.key === 'engager' && b.startsWith('Vous ne bénéficiez pas')));
+                          const BulletIcon = shouldShowRestrictionIcon ? X : CheckCircle;
+
+                          return (
+                            <li
+                              key={b}
+                              className="animate-jloow-fade-up flex gap-3"
+                              style={{ animationDelay: `${120 + bIndex * 100}ms` }}
+                            >
+                              <span
+                                className={cn(
+                                  'mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white shadow-sm',
+                                  shouldShowRestrictionIcon
+                                    ? 'bg-slate-500 shadow-slate-500/20'
+                                    : isSubscriberJourney
+                                      ? 'bg-gradient-to-br from-emerald-500 to-green-600 shadow-emerald-500/20'
+                                      : 'bg-gradient-to-br from-[#8A2BE2] to-[#4169E1] shadow-primary/20'
+                                )}
+                              >
+                                <BulletIcon className="h-3.5 w-3.5" />
+                              </span>
+                              <span className="text-sm sm:text-base leading-relaxed">
+                                {renderPillarBulletText(b)}
+                              </span>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   </div>
 
                   <div
-                    key={`pillar-image-${activePillar}`}
-                    className="jloow-swap group relative min-h-[320px] overflow-hidden border border-border/60 bg-card/80 shadow-[0_20px_80px_-40px_hsl(var(--foreground)/0.2)]"
+                    key={`pillar-image-${activeJourney}-${activePillar}`}
+                    className={cn(
+                      'jloow-swap group relative min-h-[320px] overflow-hidden bg-card/80 shadow-[0_20px_80px_-40px_hsl(var(--foreground)/0.2)]',
+                      isSubscriberJourney ? 'border border-emerald-200/80' : 'border border-border/60'
+                    )}
                     style={{
                       borderRadius: '1.5rem',
                       clipPath: 'inset(0 round 1.5rem)',
@@ -1638,7 +1891,12 @@ export default function HomePage() {
                       style={{ borderRadius: 'inherit' }}
                     />
                     <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-white/75 px-4 py-3 shadow-lg backdrop-blur">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
+                      <p
+                        className={cn(
+                          'text-[10px] font-semibold uppercase tracking-[0.2em]',
+                          isSubscriberJourney ? 'text-emerald-700' : 'text-primary'
+                        )}
+                      >
                         {activePillarData.title}
                       </p>
                       <p className="mt-0.5 text-sm font-semibold leading-tight text-foreground">
@@ -1667,7 +1925,7 @@ export default function HomePage() {
                             <span className="text-xs text-muted-foreground">avant l’événement</span>
                           </div>
                           <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                            Jloow prépare les meilleurs échanges à partir de ce que vous cherchez et proposez.
+                            JLOOW prépare les meilleurs échanges à partir de ce que vous cherchez et proposez.
                           </p>
                         </div>
 
@@ -1708,7 +1966,7 @@ export default function HomePage() {
 
                 <div className="mx-auto mt-5 w-full max-w-6xl">
                   <div className="grid grid-cols-1 items-stretch gap-3 sm:grid-cols-3">
-                    {bottomItems.map((item) => {
+                    {activeBottomItems.map((item) => {
                       const Icon = item.icon;
                       const isActive = item.key === activePillar;
                       return (
@@ -1723,7 +1981,9 @@ export default function HomePage() {
                             'text-left',
                             'transition',
                             isActive
-                              ? 'bg-card border-primary/30 shadow-[0_18px_50px_-28px_rgba(91,33,182,0.5)]'
+                              ? isSubscriberJourney
+                                ? 'bg-card border-emerald-300/70 shadow-[0_18px_50px_-28px_rgba(16,185,129,0.5)]'
+                                : 'bg-card border-primary/30 shadow-[0_18px_50px_-28px_rgba(91,33,182,0.5)]'
                               : 'hover:bg-card hover:border-border',
                             'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
                           ].join(' ')}
@@ -1732,8 +1992,12 @@ export default function HomePage() {
                             className={[
                               'absolute inset-0 rounded-2xl transition',
                               isActive
-                                ? 'bg-gradient-to-r from-[#8A2BE2]/14 to-[#4169E1]/14'
-                                : 'bg-gradient-to-r from-[#8A2BE2]/0 to-[#4169E1]/0 group-hover:from-[#8A2BE2]/8 group-hover:to-[#4169E1]/8',
+                                ? isSubscriberJourney
+                                  ? 'bg-gradient-to-r from-emerald-500/14 to-green-600/14'
+                                  : 'bg-gradient-to-r from-[#8A2BE2]/14 to-[#4169E1]/14'
+                                : isSubscriberJourney
+                                  ? 'bg-gradient-to-r from-emerald-500/0 to-green-600/0 group-hover:from-emerald-500/8 group-hover:to-green-600/8'
+                                  : 'bg-gradient-to-r from-[#8A2BE2]/0 to-[#4169E1]/0 group-hover:from-[#8A2BE2]/8 group-hover:to-[#4169E1]/8',
                             ].join(' ')}
                           />
                           <span className="relative flex h-full items-center gap-3">
@@ -1741,7 +2005,9 @@ export default function HomePage() {
                               className={[
                                 'inline-flex h-10 w-10 items-center justify-center rounded-xl ring-1 transition',
                                 isActive
-                                  ? 'bg-primary/10 ring-primary/20'
+                                  ? isSubscriberJourney
+                                    ? 'bg-emerald-100 ring-emerald-200'
+                                    : 'bg-primary/10 ring-primary/20'
                                   : 'bg-muted/60 ring-border/60',
                               ].join(' ')}
                             >
@@ -1749,7 +2015,9 @@ export default function HomePage() {
                                 className={[
                                   'h-5 w-5 transition',
                                   isActive
-                                    ? 'text-primary'
+                                    ? isSubscriberJourney
+                                      ? 'text-emerald-700'
+                                      : 'text-primary'
                                     : 'text-muted-foreground group-hover:text-foreground',
                                 ].join(' ')}
                               />
@@ -1784,11 +2052,11 @@ export default function HomePage() {
                       lineHeight: '1.15',
                     }}
                   >
-                    Découvrez si <span className="jloow-gradient-text">JLOOW vous correspond</span>
+                    Complétez le quiz <span className="jloow-gradient-text">pour vous inscrire</span>
                   </h2>
                   <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-[#8A2BE2] to-[#4169E1]" />
                   <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
-                    Répondez au quiz suivant pour vérifier la pertinence de la solution Jloow et vous inscrire
+                    Vérifiez si la solution JLOOW vous correspond
                   </p>
                 </Reveal>
 
@@ -1970,7 +2238,7 @@ export default function HomePage() {
             </div>
           </section>
 
-          <section id="formules" className="relative scroll-mt-12 overflow-hidden py-20 sm:py-24">
+          <section id="faq" className="relative scroll-mt-12 overflow-hidden py-20 sm:py-24">
             <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(255,255,255,0.95)_0%,rgba(246,244,255,0.98)_100%)]" />
             <div className="absolute -top-16 left-16 -z-10 h-56 w-56 rounded-full bg-[#8A2BE2]/8 blur-3xl animate-jloow-float" />
             <div className="absolute bottom-0 right-10 -z-10 h-64 w-64 rounded-full bg-[#4169E1]/8 blur-3xl animate-jloow-float-slow" />
@@ -1984,11 +2252,131 @@ export default function HomePage() {
                     lineHeight: '1.12',
                   }}
                 >
-                  Choisissez la formule <span className="jloow-gradient-text">qui vous convient</span>
+                  FAQ
                 </h2>
                 <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-[#8A2BE2] to-[#4169E1]" />
+                <p className="mt-4 text-sm text-muted-foreground sm:text-base">
+                  Les réponses aux questions fréquentes par rapport à votre expérience sur JLOOW
+                </p>
               </Reveal>
 
+              <Reveal className="mx-auto mt-10 w-full max-w-4xl" direction="up" delay={80}>
+                <div className="space-y-3">
+                  {faqItems.map((item, index) => {
+                    const isOpen = openFaqIndex === index;
+
+                    return (
+                      <article
+                        key={item.question}
+                        className={cn(
+                          'overflow-hidden rounded-2xl border bg-white/85 text-left shadow-[0_20px_70px_-42px_hsl(var(--foreground)/0.24)] backdrop-blur transition',
+                          isOpen ? 'border-primary/30' : 'border-border/60'
+                        )}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => setOpenFaqIndex((current) => (current === index ? -1 : index))}
+                          className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6"
+                          aria-expanded={isOpen}
+                        >
+                          <span className="text-base font-bold leading-snug text-foreground sm:text-lg">
+                            {item.question}
+                          </span>
+                          <span
+                            className={cn(
+                              'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition',
+                              isOpen
+                                ? 'border-primary/30 bg-primary/10 text-primary'
+                                : 'border-border/70 bg-white text-muted-foreground'
+                            )}
+                            aria-hidden="true"
+                          >
+                            <ChevronDown
+                              className={cn('h-4 w-4 transition-transform duration-300', isOpen ? 'rotate-180' : '')}
+                            />
+                          </span>
+                        </button>
+
+                        <div
+                          className={cn(
+                            'grid transition-all duration-300 ease-out',
+                            isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                          )}
+                        >
+                          <div className="overflow-hidden">
+                            <p className="whitespace-pre-line px-5 pb-5 text-sm leading-relaxed text-muted-foreground sm:px-6">
+                              {item.answer}
+                            </p>
+                            <div className="flex items-center justify-between gap-3 border-t border-border/60 px-5 py-3 sm:px-6">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (satisfiedFaqIndexes[index]) {
+                                    setFaqSatisfactionCounts((current) => ({
+                                      ...current,
+                                      [index]: Math.max((current[index] ?? 0) - 1, 0),
+                                    }));
+                                    setSatisfiedFaqIndexes((current) => {
+                                      const next = {
+                                        ...current,
+                                        [index]: false,
+                                      };
+
+                                      try {
+                                        window.localStorage.setItem('jloow-faq-satisfied-indexes', JSON.stringify(next));
+                                      } catch {
+                                        // Ignore unavailable localStorage.
+                                      }
+
+                                      return next;
+                                    });
+                                    return;
+                                  }
+
+                                  setFaqSatisfactionCounts((current) => ({
+                                    ...current,
+                                    [index]: (current[index] ?? 0) + 1,
+                                  }));
+                                  setSatisfiedFaqIndexes((current) => {
+                                    const next = {
+                                      ...current,
+                                      [index]: true,
+                                    };
+
+                                    try {
+                                      window.localStorage.setItem('jloow-faq-satisfied-indexes', JSON.stringify(next));
+                                    } catch {
+                                      // Ignore unavailable localStorage.
+                                    }
+
+                                    return next;
+                                  });
+                                }}
+                                className={cn(
+                                  'inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition',
+                                  satisfiedFaqIndexes[index]
+                                    ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:border-emerald-300 hover:bg-emerald-100'
+                                    : 'border-border/70 bg-white text-muted-foreground hover:border-primary/30 hover:text-primary'
+                                )}
+                                aria-label={`Indiquer que la réponse "${item.question}" est satisfaisante`}
+                              >
+                                <ThumbsUp className="h-3.5 w-3.5" />
+                                {satisfiedFaqIndexes[index] ? 'Retirer ma satisfaction' : 'Réponse utile'}
+                              </button>
+                              <span className="text-xs font-medium text-muted-foreground">
+                                {faqSatisfactionCounts[index] ?? 0} satisfaction
+                                {(faqSatisfactionCounts[index] ?? 0) > 1 ? 's' : ''}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              </Reveal>
+
+              <div className="hidden">
               <Reveal className="mx-auto mt-8 flex w-full max-w-4xl items-center justify-center gap-2 sm:gap-3" direction="up" delay={80}>
                 {formulas.map((formula, index) => {
                   const isActive = index === activeFormula;
@@ -2058,7 +2446,7 @@ export default function HomePage() {
                                         ? '/formules-smart-match-corpo-evenements.png'
                                         : '/formules-evenements-partenaires.png'
                                   }
-                                  alt={highlightIndex === 0 ? 'Illustration des drops' : 'Illustration des événements'}
+                                  alt={highlightIndex === 0 ? 'Illustration des Drops' : 'Illustration des événements'}
                                   fill
                                   className="rounded-[inherit] object-cover"
                                 />
@@ -2128,7 +2516,7 @@ export default function HomePage() {
                           {activeFormulaData.key === 'smart-match-corpo' ? null : (
                             <p>
                               <sup className="mr-1 text-[0.8em] align-super">2</sup>
-                              Le nombre de drops proposés dépend du nombre de participants inscrits à l&apos;événement :
+                              Le nombre de Drops proposés dépend du nombre de participants inscrits à l&apos;événement :
                               il peut varier de 2 pour 20 participants à 6 pour 60 participants ou plus.
                             </p>
                           )}
@@ -2143,9 +2531,13 @@ export default function HomePage() {
                             <span className="mr-1" aria-hidden="true">
                               {activeFormulaPartnerCta.icon}
                             </span>
-                            <a href={activeFormulaPartnerCta.href} className="underline underline-offset-4">
+                            <button
+                              type="button"
+                              onClick={() => copyEmailToClipboard(getEmailFromMailto(activeFormulaPartnerCta.href))}
+                              className="underline underline-offset-4"
+                            >
                               {activeFormulaPartnerCta.label}
-                            </a>
+                            </button>
                           </p>
                         ) : null}
                       </div>
@@ -2227,11 +2619,12 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
+              </div>
             </div>
           </section>
         </main>
 
-        <footer className="relative z-10 pb-10">
+        <footer id="footer" className="relative z-10 scroll-mt-20 pb-10">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mt-8 flex flex-col items-center gap-3 text-center text-xs text-muted-foreground">
               <div className="inline-flex items-center gap-2">
@@ -2251,7 +2644,7 @@ export default function HomePage() {
                 rel="noopener noreferrer"
                 className="text-muted-foreground transition hover:text-foreground underline underline-offset-4"
               >
-                Lire l’histoire de Jloow
+                Lire l’histoire de JLOOW
               </a>
 
               <button

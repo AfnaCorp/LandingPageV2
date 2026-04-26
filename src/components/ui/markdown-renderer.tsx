@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 type MarkdownRendererProps = {
@@ -37,13 +37,29 @@ const sanitizeHref = (href: string): string => {
   return '#';
 };
 
+const getMailtoEmail = (href: string): string | null => {
+  if (!href.trim().toLowerCase().startsWith('mailto:')) {
+    return null;
+  }
+
+  return href.trim().slice('mailto:'.length).split('?')[0] || null;
+};
+
 const renderInline = (text: string): string => {
   let content = escapeHtml(text);
 
   content = content.replace(
     /\[([^\]]+)\]\(([^)\s]+)\)/g,
-    (_, label: string, href: string) =>
-      `<a href="${escapeHtml(sanitizeHref(href))}" target="_blank" rel="noopener noreferrer">${label}</a>`
+    (_, label: string, href: string) => {
+      const sanitizedHref = sanitizeHref(href);
+      const mailtoEmail = getMailtoEmail(sanitizedHref);
+
+      if (mailtoEmail) {
+        return `<a href="#" data-copy-email="${escapeHtml(mailtoEmail)}">${escapeHtml(label)}</a>`;
+      }
+
+      return `<a href="${escapeHtml(sanitizedHref)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+    }
   );
 
   content = content.replace(/`([^`]+)`/g, '<code>$1</code>');
@@ -260,32 +276,55 @@ const markdownToHtml = (markdown: string): string => {
 };
 
 export function MarkdownRenderer({ markdown, className }: MarkdownRendererProps) {
-  const html = markdownToHtml(markdown);
+  const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
+  const html = useMemo(() => markdownToHtml(markdown), [markdown]);
 
   return (
-    <div
-      className={cn(
-        'text-sm leading-relaxed text-foreground',
-        '[&_h1]:mb-3 [&_h1]:text-xl [&_h1]:font-semibold',
-        '[&_h2]:mb-3 [&_h2]:text-lg [&_h2]:font-semibold',
-        '[&_h3]:mb-2 [&_h3]:text-base [&_h3]:font-semibold',
-        '[&_p]:mb-3',
-        '[&_ul]:mb-3 [&_ul]:list-disc [&_ul]:pl-5',
-        '[&_ol]:mb-3 [&_ol]:list-decimal [&_ol]:pl-5',
-        '[&_li]:mb-1',
-        '[&_a]:font-medium [&_a]:text-primary [&_a]:underline',
-        '[&_strong]:font-semibold',
-        '[&_em]:italic',
-        '[&_code]:rounded [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.9em]',
-        '[&_table]:mb-4 [&_table]:min-w-full [&_table]:border-collapse [&_table]:overflow-hidden [&_table]:rounded-xl',
-        '[&_thead]:bg-muted/50',
-        '[&_tr]:border-b [&_tr]:border-border/60',
-        '[&_th]:border [&_th]:border-border/60 [&_th]:px-3 [&_th]:py-2 [&_th]:font-semibold',
-        '[&_td]:border [&_td]:border-border/60 [&_td]:px-3 [&_td]:py-2 [&_td]:align-top',
-        '[&_hr]:my-4 [&_hr]:border-border/60',
-        className
-      )}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <div>
+      <div
+        className={cn(
+          'text-sm leading-relaxed text-foreground',
+          '[&_h1]:mb-3 [&_h1]:text-xl [&_h1]:font-semibold',
+          '[&_h2]:mb-3 [&_h2]:text-lg [&_h2]:font-semibold',
+          '[&_h3]:mb-2 [&_h3]:text-base [&_h3]:font-semibold',
+          '[&_p]:mb-3',
+          '[&_ul]:mb-3 [&_ul]:list-disc [&_ul]:pl-5',
+          '[&_ol]:mb-3 [&_ol]:list-decimal [&_ol]:pl-5',
+          '[&_li]:mb-1',
+          '[&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:cursor-pointer',
+          '[&_strong]:font-semibold',
+          '[&_em]:italic',
+          '[&_code]:rounded [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.9em]',
+          '[&_table]:mb-4 [&_table]:min-w-full [&_table]:border-collapse [&_table]:overflow-hidden [&_table]:rounded-xl',
+          '[&_thead]:bg-muted/50',
+          '[&_tr]:border-b [&_tr]:border-border/60',
+          '[&_th]:border [&_th]:border-border/60 [&_th]:px-3 [&_th]:py-2 [&_th]:font-semibold',
+          '[&_td]:border [&_td]:border-border/60 [&_td]:px-3 [&_td]:py-2 [&_td]:align-top',
+          '[&_hr]:my-4 [&_hr]:border-border/60',
+          className
+        )}
+        onClick={(event) => {
+          const target = event.target instanceof HTMLElement ? event.target.closest('a[data-copy-email]') : null;
+          if (!(target instanceof HTMLAnchorElement)) {
+            return;
+          }
+
+          event.preventDefault();
+          const email = target.dataset.copyEmail;
+          if (!email) {
+            return;
+          }
+
+          void navigator.clipboard.writeText(email).then(() => {
+            setCopiedEmail(email);
+            window.setTimeout(() => setCopiedEmail(null), 1800);
+          });
+        }}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+      {copiedEmail ? (
+        <p className="mt-2 text-xs font-medium text-primary">Adresse copiée : {copiedEmail}</p>
+      ) : null}
+    </div>
   );
 }

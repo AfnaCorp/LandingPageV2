@@ -29,7 +29,7 @@ export async function LegalDocumentPage({ title, fileName }: LegalDocumentPagePr
             <span className="text-lg font-bold text-foreground">JLOOW</span>
           </Link>
 
-          <Link href="/" className="text-sm font-semibold text-muted-foreground underline underline-offset-4 hover:text-foreground">
+          <Link href="/#footer" className="text-sm font-semibold text-muted-foreground underline underline-offset-4 hover:text-foreground">
             Retour à l'accueil
           </Link>
         </nav>
